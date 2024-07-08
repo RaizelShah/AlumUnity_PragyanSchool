@@ -5,6 +5,12 @@ import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
 import Navbar from "../helper/navbar";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 function Home() {
   const navigate = useNavigate();
@@ -36,12 +42,21 @@ function Home() {
                 </p>
               </div>
               <div className="mt-12 flex ">
-                <button
-                  className="bg-yellow-500 w-28 text-white px-6 py-3 rounded-3xl"
-                  onClick={handleLoginClick}
-                >
-                  Login
-                </button>
+                <SignedOut>
+                  <SignInButton
+                    className="bg-orange-500"
+                    mode="modal"
+                    forceRedirectUrl="/login"
+                  />
+                </SignedOut>
+                <SignedIn>
+                  <button
+                    className="bg-yellow-500 w-28 text-white px-6 py-3 rounded-3xl"
+                    onClick={handleLoginClick}
+                  >
+                    Continue
+                  </button>
+                </SignedIn>
               </div>
               <div className="flex w-2/3 m-3 mt-8 ">
                 <button className=" text-lg font-bold w-1/4 text-white p-2 rounded-full mx-auto my-4 hover:bg-blue-900 transition-all duration-200 ease-in-out">
